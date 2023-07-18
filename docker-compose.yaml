@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+  lifewindpaneladmin:
+    container_name: lifewindpaneladmin
+    tty: true
+    volumes:
+      - ./:/app
+    build: .
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
