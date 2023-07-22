@@ -1,6 +1,9 @@
 package br.com.lifewind.paneladmin.domain;
 
+import br.com.lifewind.paneladmin.record.CreatePlant;
 import jakarta.persistence.*;
+
+import java.sql.Timestamp;
 import java.util.Date;
 
 @Entity
@@ -19,7 +22,13 @@ public class Plant {
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedAt;
 
-    private boolean active;
+    private boolean active = false;
+
+    public Plant(CreatePlant data) {
+        this.name = data.name();
+        this.active = data.active();
+        this.createdAt = new Timestamp(System.currentTimeMillis());
+    }
 
     public long getPlantId() {
         return plantId;
