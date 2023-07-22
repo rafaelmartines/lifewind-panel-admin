@@ -6,6 +6,7 @@ import br.com.lifewind.paneladmin.repository.PlantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -16,17 +17,23 @@ public class PlantController {
     private PlantRepository repository;
 
     @GetMapping()
-    public String listPlants() {
-        return "plants";
+    public String listPlants(Model model) {
+        model.addAttribute("list", repository.findAll());
+        return "plants/list";
     }
 
-    @PostMapping()
+    @PostMapping("/create")
     @Transactional
-    public String createPlants(CreatePlant data) {
-        System.out.println(data);
+    public String savePlants(CreatePlant data) {
         var plant = new Plant(data);
         repository.save(plant);
 
-        return "plants";
+        return "redirect:/plants";
+    }
+
+    @GetMapping("/create")
+    @Transactional
+    public String createPlants() {
+        return "plants/create";
     }
 }

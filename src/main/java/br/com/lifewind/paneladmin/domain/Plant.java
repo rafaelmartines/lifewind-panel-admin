@@ -30,6 +30,8 @@ public class Plant {
         this.createdAt = new Timestamp(System.currentTimeMillis());
     }
 
+    public Plant() {}
+
     public long getPlantId() {
         return plantId;
     }
