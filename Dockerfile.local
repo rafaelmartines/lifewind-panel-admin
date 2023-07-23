@@ -1,6 +1,5 @@
 FROM eclipse-temurin:17-jdk-alpine
 LABEL org.opencontainers.image.authors="rafael.martines@gmail.com"
-ENV SPRING_PROFILES_ACTIVE=dev
 
 WORKDIR /app
 

@@ -6,7 +6,8 @@ services:
     tty: true
     volumes:
       - ./:/app
-    build: .
+    build:
+      dockerfile: Dockerfile.local
     restart: unless-stopped
     ports:
       - "8080:8080"
