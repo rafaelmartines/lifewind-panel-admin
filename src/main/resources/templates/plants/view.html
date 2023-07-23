@@ -1,10 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html
+        lang="pt"
+        xmlns:th="https://www.thymeleaf.org/"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{base.html}"
+>
+<head th:replace="base :: headerFragment (pageTitle=${plant.name})">
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title></title>
 </head>
 <body>
+<div layout:fragment="content">
+    <h1 th:text="${plant.name}"></h1>
+    <hr>
+    <div class="row">
+        <div class="col text-end">
+            <a class="btn btn-primary" th:href="@{{plantId}/edit(plantId=${plant.plantId})}"><i class="bi bi-pencil-square"></i> Editar</a>
+            <a class="btn btn-danger" href="#"><i class="bi bi-trash"></i> Remover</a>
+        </div>
+    </div>
+    <br>
+    <table class="table table-bordered">
+        <tbody>
+            <tr>
+                <th scope="row" class="table-active" style="width: 10%;">Nome:</th>
+                <td th:text="${plant.name}" style="width: 40%;"></td>
+                <th scope="row" class="table-active" style="width: 10%;">Situação:</th>
+                <td th:utext="${plant.active} ? '<span class=&quot;badge text-bg-success&quot;>Ativo</span>' : '<span class=&quot;badge text-bg-secondary&quot;>Inativo</span>'" style="width: 40%;"></td>
+            </tr>
+            <tr>
+                <th scope="row" class="table-active">Criado em:</th>
+                <td th:text="${#dates.format(plant.createdAt, 'dd/MM/yyyy HH:mm')}"></td>
+                <th scope="row" class="table-active">Atualizado em:</th>
+                <td th:text="${#dates.format(plant.updatedAt, 'dd/MM/yyyy HH:mm')}"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 
 </body>
 </html>

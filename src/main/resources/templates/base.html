@@ -2,9 +2,9 @@
 <html lang="en"
       xmlns:th="https://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-<head>
+<head th:fragment="headerFragment (pageTitle)">
   <meta charset="UTF-8">
-  <title>Plants</title>
+  <title th:text="${pageTitle}">Lifewind Panel Admin</title>
   <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
   <link th:href="@{/css/bootstrap-icons/font/bootstrap-icons.min.css}" rel="stylesheet">
 </head>
