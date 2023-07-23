@@ -11,5 +11,5 @@ RUN chmod +x mvnw \
 
 COPY src ./src
 
-CMD ["./mvnw", "spring-boot:run"]
 EXPOSE 8080
+ENTRYPOINT ["./mvnw", "spring-boot:run"]
