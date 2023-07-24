@@ -69,7 +69,7 @@
 					</execution>
 				</executions>
 				<configuration>
-					<skip>true</skip>
+					<mainClass>br.com.lifewind.paneladmin.PaneladminApplication</mainClass>
 				</configuration>
 			</plugin>
 		</plugins>
