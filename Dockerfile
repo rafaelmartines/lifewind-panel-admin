@@ -9,7 +9,7 @@ WORKDIR /app
 
 COPY .mvn/ .mvn
 COPY mvnw pom.xml ./
-RUN mvn clean package -DskipTests
+RUN mvn clean package
 
 COPY src ./src
 
