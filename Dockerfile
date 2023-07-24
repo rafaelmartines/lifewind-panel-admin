@@ -1,7 +1,7 @@
 FROM eclipse-temurin:17-jdk-alpine
 LABEL org.opencontainers.image.authors="rafael.martines@gmail.com"
 
-ENV SPRING_PROFILES_ACTIVE=default
+ENV SPRING_PROFILES_ACTIVE=dev
 
 RUN apk --update --no-cache add maven
 
