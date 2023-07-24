@@ -15,7 +15,6 @@
 	<description>Painel de Administração do Lifewind</description>
 	<properties>
 		<java.version>17</java.version>
-		<start-class>br.com.lifewind.paneladmin.PaneladminApplication</start-class>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -62,10 +61,6 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<mainClass>br.com.lifewind.paneladmin.PaneladminApplication</mainClass>
-					<layout>JAR</layout>
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>
