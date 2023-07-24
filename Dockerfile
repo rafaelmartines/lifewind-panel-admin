@@ -1,17 +1,20 @@
-FROM eclipse-temurin:17-jdk-alpine
-LABEL org.opencontainers.image.authors="rafael.martines@gmail.com"
+#
+# Build stage
+#
+FROM maven:3.8.2-jdk-17 AS build
+COPY . .
+RUN mvn clean package -Pprod -DskipTests
 
+
+#
+# Package stage
+#
+FROM openjdk:17-jdk-slim
+LABEL org.opencontainers.image.authors="rafael.martines@gmail.com"
 ENV SPRING_PROFILES_ACTIVE=dev
 
-RUN apk --update --no-cache add maven
+COPY --from=build /target/paneladmin-0.0.1-SNAPSHOT.jar paneladmin.jar
 
-WORKDIR /app
-
-COPY .mvn/ .mvn
-COPY mvnw pom.xml ./
-RUN mvn clean package
-
-COPY src ./src
-
+# ENV PORT=8080
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "target/paneladmin-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java", "-jar", "paneladmin.jar"]
