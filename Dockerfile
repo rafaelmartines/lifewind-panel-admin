@@ -1,6 +1,10 @@
 FROM eclipse-temurin:17-jdk-alpine
 LABEL org.opencontainers.image.authors="rafael.martines@gmail.com"
-ENV SPRING_PROFILES_ACTIVE=dev
+
+ENV SPRING_PROFILES_ACTIVE=default
+
+RUN apk --update --no-cache add maven \
+    && mvn clean package
 
 WORKDIR /app
 
@@ -12,4 +16,4 @@ RUN chmod +x mvnw \
 COPY src ./src
 
 EXPOSE 8080
-ENTRYPOINT ["./mvnw", "spring-boot:run"]
+ENTRYPOINT ["java", "-jar", "target/paneladmin-0.0.1-SNAPSHOT.jar"]
