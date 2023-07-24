@@ -3,14 +3,14 @@ LABEL org.opencontainers.image.authors="rafael.martines@gmail.com"
 
 ENV SPRING_PROFILES_ACTIVE=default
 
-RUN apk --update --no-cache add maven \
-    && mvn clean package
+RUN apk --update --no-cache add maven
 
 WORKDIR /app
 
 COPY .mvn/ .mvn
 COPY mvnw pom.xml ./
 RUN chmod +x mvnw \
+    && mvn clean package \
     && ./mvnw dependency:resolve
 
 COPY src ./src
