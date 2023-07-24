@@ -9,9 +9,7 @@ WORKDIR /app
 
 COPY .mvn/ .mvn
 COPY mvnw pom.xml ./
-RUN chmod +x mvnw \
-    && mvn clean package \
-    && ./mvnw dependency:resolve
+RUN mvn clean package
 
 COPY src ./src
 
