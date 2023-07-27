@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS public.plant (
+CREATE TABLE IF NOT EXISTS plant (
 	active bool NOT NULL,
 	created_at timestamp(6) NULL,
 	plant_id bigserial NOT NULL,
