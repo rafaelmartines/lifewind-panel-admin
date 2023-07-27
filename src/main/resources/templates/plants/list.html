@@ -5,7 +5,7 @@
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
         layout:decorate="~{base.html}"
 >
-<head th:replace="base :: headerFragment (pageTitle='Plantas')">
+<head th:replace="~{base :: headerFragment (pageTitle='Plantas')}">
     <meta charset="UTF-8">
     <title></title>
 </head>
@@ -31,8 +31,9 @@
                         <td th:text="${plant.name}" class="align-middle"></td>
                         <td>
                             <div class="btn-group btn-group-sm" role="group" aria-label="Ações">
-                                <a th:href="@{plants/{plantId}(plantId=${plant.plantId})}" class="btn btn-outline-primary"><i class="bi bi-eye"></i></a>
-                                <a th:href="@{plants/{plantId}/edit(plantId=${plant.plantId})}" class="btn btn-outline-primary"><i class="bi bi-pencil-square"></i></a>
+                                <button type="button" class="btn btn-outline-info"><i class="bi bi-filetype-json"></i></button>
+                                <a th:href="@{plants/{plantId}(plantId=${plant.plantId})}" class="btn btn-outline-primary" data-bs-toggle="tooltip" data-bs-title="Visualizar"><i class="bi bi-eye"></i></a>
+                                <a th:href="@{plants/{plantId}/edit(plantId=${plant.plantId})}" class="btn btn-outline-primary" data-bs-toggle="tooltip" data-bs-title="Editar"><i class="bi bi-pencil-square"></i></a>
                                 <button type="button" class="btn btn-outline-danger"><i class="bi bi-trash"></i></button>
                             </div>
                         </td>
