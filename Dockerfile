@@ -12,6 +12,7 @@ RUN mvn clean package -Pprod -DskipTests
 FROM openjdk:17-jdk-slim
 LABEL org.opencontainers.image.authors="rafael.martines@gmail.com"
 ENV SPRING_PROFILES_ACTIVE=dev
+ENV TZ="America/Sao_Paulo"
 
 COPY --from=build /target/paneladmin-0.0.1-SNAPSHOT.jar paneladmin.jar
 
