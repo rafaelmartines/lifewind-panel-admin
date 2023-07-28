@@ -31,7 +31,7 @@
                         <td th:text="${plant.name}" class="align-middle"></td>
                         <td>
                             <div class="btn-group btn-group-sm" role="group" aria-label="Ações">
-                                <button type="button" class="btn btn-outline-info"><i class="bi bi-filetype-json"></i></button>
+                                <a th:href="@{v1/plants/{plantId}(plantId=${plant.plantId})}" class="btn btn-outline-info" target="_blank"><i class="bi bi-filetype-json"></i></a>
                                 <a th:href="@{plants/{plantId}(plantId=${plant.plantId})}" class="btn btn-outline-primary" data-bs-toggle="tooltip" data-bs-title="Visualizar"><i class="bi bi-eye"></i></a>
                                 <a th:href="@{plants/{plantId}/edit(plantId=${plant.plantId})}" class="btn btn-outline-primary" data-bs-toggle="tooltip" data-bs-title="Editar"><i class="bi bi-pencil-square"></i></a>
                                 <button type="button" class="btn btn-outline-danger"><i class="bi bi-trash"></i></button>
