@@ -1,6 +1,12 @@
 package br.com.lifewind.paneladmin.record;
 
-public record CreatePlant(String name, Boolean active) {
+import jakarta.validation.constraints.NotBlank;
+
+public record CreatePlant(
+        @NotBlank
+        String name,
+        Boolean active
+) {
 
     public Boolean active() {
         return (active != null) ? active : false;

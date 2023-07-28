@@ -25,8 +25,7 @@ public class PlantController {
     @PostMapping("/create")
     @Transactional
     public String savePlants(CreatePlant data) {
-        var plant = new Plant(data);
-        repository.save(plant);
+        repository.save(new Plant(data));
 
         return "redirect:/plants";
     }
@@ -39,8 +38,7 @@ public class PlantController {
 
     @GetMapping("/{plantId}")
     public String viewPlant(@PathVariable("plantId") Long plantId, Model model) {
-        var plant = repository.getReferenceById(plantId);
-        model.addAttribute("plant", plant);
+        model.addAttribute("plant", repository.getReferenceById(plantId));
 
         return "plants/view";
     }
