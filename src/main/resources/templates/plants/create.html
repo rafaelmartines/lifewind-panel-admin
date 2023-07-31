@@ -5,14 +5,14 @@
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
         layout:decorate="~{base.html}"
 >
-<head>
-    <meta charset="UTF-8">
-    <title>Cadastro de Planta</title>
+<head th:replace="~{base :: headerFragment (pageTitle='Cadastro de Plantas')}">
+  <meta charset="UTF-8">
+  <title></title>
 </head>
 <body>
 <div layout:fragment="content">
   <h1>Cadastro de Plantas</h1>
-  <form th:method="post">
+  <form th:method="post" id="plant">
     <div class="mb-3">
       <label for="name" class="form-label">Nome da Planta</label>
       <input type="text" class="form-control" id="name" name="name" required>
@@ -26,6 +26,37 @@
     <button type="submit" class="btn btn-primary">Gravar</button>
   </form>
 </div>
+
+<script layout:fragment="script">
+  $(document).ready(function() {
+    $("#plant").submit(function(e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      var data = {};
+      formData.forEach(function(value, key) {
+        if (value === "on") {
+          value = true;
+        }
+        data[key] = value;
+      });
+
+      $("form :submit").addClass("disabled");
+
+      $.ajax({
+        url: "/v1/plants",
+        data: JSON.stringify(data),
+        type: "POST",
+        contentType: "application/json; charset=utf-8"
+      }).done(function() {
+        alert("Cadastro feito com sucesso");
+        window.location.href="/plants";
+      }).fail(function() {
+        alert("Falha ao realizar o cadastro");
+        $("form :submit").removeClass("disabled");
+      });
+    });
+  });
+</script>
 
 </body>
 </html>

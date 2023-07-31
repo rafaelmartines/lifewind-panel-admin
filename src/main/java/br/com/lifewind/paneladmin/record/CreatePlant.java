@@ -9,6 +9,6 @@ public record CreatePlant(
 ) {
 
     public Boolean active() {
-        return (active != null) ? active : false;
+        return active != null;
     }
 }

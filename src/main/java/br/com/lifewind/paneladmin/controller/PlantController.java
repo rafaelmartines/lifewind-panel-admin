@@ -22,14 +22,6 @@ public class PlantController {
         return "plants/list";
     }
 
-    @PostMapping("/create")
-    @Transactional
-    public String savePlants(CreatePlant data) {
-        repository.save(new Plant(data));
-
-        return "redirect:/plants";
-    }
-
     @GetMapping("/create")
     @Transactional
     public String createPlants() {
