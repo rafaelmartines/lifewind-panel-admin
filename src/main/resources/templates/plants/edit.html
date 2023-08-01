@@ -1,10 +1,64 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html
+        lang="pt"
+        xmlns:th="https://www.thymeleaf.org/"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{base.html}"
+>
+<head th:replace="~{base :: headerFragment (pageTitle='Edição de Plantas')}">
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title></title>
 </head>
 <body>
+<div layout:fragment="content">
+    <h1>Edição de Plantas</h1>
+    <form th:method="post" id="plant">
+        <input type="hidden" id="plantId" name="plantId" th:value="${plant?.plantId}">
+        <div class="mb-3">
+            <label for="name" class="form-label">Nome da Planta</label>
+            <input type="text" class="form-control" id="name" name="name" th:value="${plant?.name}" required>
+        </div>
+        <div class="mb-3">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="active" th:checked="${plant.active} ? 'checked'" name="active">
+                <label class="form-check-label" for="active">Ativo</label>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Gravar</button>
+    </form>
+</div>
+
+<script layout:fragment="script">
+    $(document).ready(function() {
+      $("#plant").submit(function(e) {
+        e.preventDefault();
+        const formData = new FormData(this);
+        var data = {};
+
+        formData.forEach(function(value, key) {
+          if (value === "on") {
+            value = true;
+          }
+          data[key] = value;
+        });
+
+        $("form :submit").addClass("disabled");
+
+        $.ajax({
+          url: "/v1/plants",
+          data: JSON.stringify(data),
+          type: "PUT",
+          contentType: "application/json; charset=utf-8"
+        }).done(function() {
+          alert("Edição feita com sucesso");
+          window.location.href="/plants/" + formData.get("plantId");
+        }).fail(function() {
+          alert("Falha ao realizar a edição");
+          $("form :submit").removeClass("disabled");
+        });
+      });
+    });
+</script>
 
 </body>
 </html>

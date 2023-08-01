@@ -17,7 +17,7 @@
         <div class="col text-end">
             <a class="btn btn-info" th:href="@{/v1/plants/{plantId}(plantId=${plant.plantId})}" target="_blank"><i class="bi bi-filetype-json"></i> JSON</a>
             <a class="btn btn-primary" th:href="@{{plantId}/edit(plantId=${plant.plantId})}"><i class="bi bi-pencil-square"></i> Editar</a>
-            <a class="btn btn-danger" href="#"><i class="bi bi-trash"></i> Remover</a>
+            <button class="btn btn-danger" th:attr="data-id=${plant.plantId}"><i class="bi bi-trash"></i> Remover</button>
         </div>
     </div>
     <br>
@@ -38,6 +38,25 @@
         </tbody>
     </table>
 </div>
+
+<script layout:fragment="script">
+    $(document).ready(function() {
+        $(".btn-danger").click(function() {
+            if (confirm("Deseja remover este registro?")) {
+                $.ajax({
+                url: "/v1/plants/" + $(this).data("id"),
+                type: "DELETE",
+              }).done(function() {
+                alert("Registro removido com sucesso");
+                window.location.href="/plants";
+              }).fail(function() {
+                alert("Falha ao remover o registro");
+                $("form :submit").removeClass("disabled");
+              });
+            }
+        });
+    });
+</script>
 
 </body>
 </html>

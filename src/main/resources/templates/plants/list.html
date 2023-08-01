@@ -34,7 +34,7 @@
                                 <a th:href="@{v1/plants/{plantId}(plantId=${plant.plantId})}" class="btn btn-outline-info" target="_blank"><i class="bi bi-filetype-json"></i></a>
                                 <a th:href="@{plants/{plantId}(plantId=${plant.plantId})}" class="btn btn-outline-primary" data-bs-toggle="tooltip" data-bs-title="Visualizar"><i class="bi bi-eye"></i></a>
                                 <a th:href="@{plants/{plantId}/edit(plantId=${plant.plantId})}" class="btn btn-outline-primary" data-bs-toggle="tooltip" data-bs-title="Editar"><i class="bi bi-pencil-square"></i></a>
-                                <button type="button" class="btn btn-outline-danger"><i class="bi bi-trash"></i></button>
+                                <button type="button" class="btn btn-outline-danger" th:attr="data-id=${plant.plantId}"><i class="bi bi-trash"></i></button>
                             </div>
                         </td>
                     </tr>
@@ -43,5 +43,24 @@
         </div>
     </div>
 </div>
+
+<script layout:fragment="script">
+    $(document).ready(function() {
+        $(".btn-outline-danger").click(function() {
+            if (confirm("Deseja remover este registro?")) {
+                $.ajax({
+                url: "/v1/plants/" + $(this).data("id"),
+                type: "DELETE",
+              }).done(function() {
+                alert("Registro removido com sucesso");
+                window.location.href="/plants";
+              }).fail(function() {
+                alert("Falha ao remover o registro");
+                $("form :submit").removeClass("disabled");
+              });
+            }
+        });
+    });
+</script>
 </body>
 </html>

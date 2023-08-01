@@ -28,6 +28,12 @@ public class PlantController {
         return "plants/create";
     }
 
+    @GetMapping("/{plantId}/edit")
+    public String editPlant(@PathVariable("plantId") Long plantId, Model model) {
+        model.addAttribute("plant", repository.getReferenceById(plantId));
+        return "plants/edit";
+    }
+
     @GetMapping("/{plantId}")
     public String viewPlant(@PathVariable("plantId") Long plantId, Model model) {
         model.addAttribute("plant", repository.getReferenceById(plantId));
